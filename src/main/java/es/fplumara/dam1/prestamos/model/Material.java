@@ -38,7 +38,7 @@ public abstract class  Material implements Identificable{
         return estado;
     }
 
-    public void setEtado(EstadoMaterial estado) {
+    public void setEstado(EstadoMaterial estado) {
         this.estado = estado;
     }
 

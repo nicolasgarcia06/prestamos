@@ -26,10 +26,19 @@ if(m.getId()==null || m.getId().isEmpty()){
 
     @Override
     public void darDeBaja(String idMaterial) {
-Optional<Material> material=materialRepository.findById(idMaterial);
+Optional<Material> opt=materialRepository.findById(idMaterial);
+        Material material = opt.get();
 if(material==null){
     throw new NoEncontradoException("no existe");
 }
+
+if(material.getEstado().equals(EstadoMaterial.BAJA)){
+    throw new MaterialNoDisponibleException("ya esta en baja");
+}
+if(material!=null && !material.getEstado().equals(EstadoMaterial.BAJA)){
+    material.setEstado(EstadoMaterial.BAJA);
+    materialRepository.save(material);
+        }
 
     }
 
