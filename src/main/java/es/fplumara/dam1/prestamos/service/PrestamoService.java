@@ -22,6 +22,6 @@ public class PrestamoService implements PrestamoServiceImpl{
 
     @Override
     public List<Prestamo> listarPrestamos() {
-        return List.of();
+        return prestamoRepository.listAll();
     }
 }
