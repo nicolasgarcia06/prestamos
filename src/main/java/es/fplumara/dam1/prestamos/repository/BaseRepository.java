@@ -10,13 +10,15 @@ import java.util.Optional;
 public class BaseRepository <T extends Identificable> implements Repository{
 Map<String,T> datos;
 private Long contador=0L;
+
+
     @Override
     public void save(Object elemento) {
         if(elemento.getId()==null) {
             elemento.setId(contador);
             contador++;
         }
-        datos.put(elemento.getId(), elemento);
+        datos.put(elemento.getId(), (T) elemento);
         return elemento;
     }
 
