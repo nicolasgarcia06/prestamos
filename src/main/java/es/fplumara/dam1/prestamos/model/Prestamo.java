@@ -19,6 +19,11 @@ public class Prestamo implements Identificable{
         return id;
     }
 
+    @Override
+    public void setId(Long contador) {
+
+    }
+
     public void setId(String id) {
         this.id = id;
     }

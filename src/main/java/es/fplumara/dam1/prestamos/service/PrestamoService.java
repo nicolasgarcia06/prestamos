@@ -16,7 +16,33 @@ public class PrestamoService implements PrestamoServiceImpl{
     private Repository<Prestamo> prestamoRepository;
     @Override
     public Prestamo crearPrestamo(String id, String profesor, LocalDate fecha) {
-        return null;
+
+if(profesor==null || profesor.isBlank()){
+    throw new IllegalArgumentException("no existe");
+}
+if(fecha==null ){
+    throw new IllegalArgumentException("no existe");
+}
+Optional<Material> opts=materialRepository.findById(id);
+Material material=opts.get();
+if(material==null){
+    throw new NoEncontradoException("material no disponible");
+}
+if(material!=null && !material.getEstado().equals(EstadoMaterial.DISPONIBLE)){
+    throw new MaterialNoDisponibleException("no es disponible");
+}
+        Optional<Prestamo> opt=prestamoRepository.findById(id);
+        Prestamo prestamo=opt.get();
+        if(prestamo==null ){
+            throw new IllegalArgumentException("no existe");
+        }
+        prestamo.setIdMaterial(prestamo.getIdMaterial());
+        prestamo.setProfesor(prestamo.getProfesor());
+        prestamo.setFecha(prestamo.getFecha());
+        prestamoRepository.save(prestamo);
+        material.setEstado(EstadoMaterial.PRESTADO);
+        materialRepository.save(material);
+        return prestamo;
     }
 
     @Override
