@@ -10,12 +10,13 @@ import es.fplumara.dam1.prestamos.repository.Repository;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public class PrestamoService implements PrestamoServiceImpl{
     private Repository<Material> materialRepository;
     private Repository<Prestamo> prestamoRepository;
     @Override
-    public Prestamo crearPrestamo(String id, String profesor, LocalDate fecha) {
+    public Prestamo crearPrestamo(String idMaterial, String profesor, LocalDate fecha) {
 
 if(profesor==null || profesor.isBlank()){
     throw new IllegalArgumentException("no existe");
@@ -23,25 +24,20 @@ if(profesor==null || profesor.isBlank()){
 if(fecha==null ){
     throw new IllegalArgumentException("no existe");
 }
-Optional<Material> opts=materialRepository.findById(id);
-Material material=opts.get();
-if(material==null){
-    throw new NoEncontradoException("material no disponible");
-}
-if(material!=null && !material.getEstado().equals(EstadoMaterial.DISPONIBLE)){
+Optional<Material> opts=materialRepository.findById(idMaterial);
+if(opts.isEmpty()){
     throw new MaterialNoDisponibleException("no es disponible");
 }
-        Optional<Prestamo> opt=prestamoRepository.findById(id);
-        Prestamo prestamo=opt.get();
-        if(prestamo==null ){
-            throw new IllegalArgumentException("no existe");
-        }
-        prestamo.setIdMaterial(prestamo.getIdMaterial());
-        prestamo.setProfesor(prestamo.getProfesor());
-        prestamo.setFecha(prestamo.getFecha());
-        prestamoRepository.save(prestamo);
-        material.setEstado(EstadoMaterial.PRESTADO);
-        materialRepository.save(material);
+Material material=opts.get();
+
+if( !material.getEstado().equals(EstadoMaterial.DISPONIBLE)){
+    throw new MaterialNoDisponibleException("no es disponible");
+}
+ String idPrestamo=UUID.randomUUID().toString();
+       Prestamo prestamo=new Prestamo(idPrestamo,idMaterial,profesor,fecha);
+this.prestamoRepository.save(prestamo);
+material.setEstado(EstadoMaterial.PRESTADO);
+this.materialRepository.save(material);
         return prestamo;
     }
 
