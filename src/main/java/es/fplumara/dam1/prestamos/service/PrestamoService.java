@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public class PrestamoService implements PrestamoServiceImpl{
+public class PrestamoServiceImpl implements PrestamoService{
     private Repository<Material> materialRepository;
     private Repository<Prestamo> prestamoRepository;
     @Override
@@ -24,11 +24,12 @@ if(fecha==null ){
     throw new IllegalArgumentException("no existe");
 }
 Optional<Material> opts=materialRepository.findById(id);
-Material material=opts.get();
-if(material==null){
+if(opts.isEmpty()){
     throw new NoEncontradoException("material no disponible");
 }
-if(material!=null && !material.getEstado().equals(EstadoMaterial.DISPONIBLE)){
+Material material=opts.get();
+
+if( !material.getEstado().equals(EstadoMaterial.DISPONIBLE)){
     throw new MaterialNoDisponibleException("no es disponible");
 }
         Optional<Prestamo> opt=prestamoRepository.findById(id);

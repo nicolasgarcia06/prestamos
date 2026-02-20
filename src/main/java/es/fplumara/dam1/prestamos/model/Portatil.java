@@ -21,4 +21,14 @@ public class Portatil extends Material{
         super(id, nombre, etado, etiquetas);
         this.ramGB = ramGB;
     }
+
+    @Override
+    public String getTipo() {
+        return "";
+    }
+
+    @Override
+    public void setId(Long contador) {
+
+    }
 }

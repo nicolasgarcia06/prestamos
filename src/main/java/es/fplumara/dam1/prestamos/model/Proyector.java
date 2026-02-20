@@ -21,4 +21,14 @@ public class Proyector extends Material{
     public void setLumens(int lumens) {
         this.lumens = lumens;
     }
+
+    @Override
+    public String getTipo() {
+        return "";
+    }
+
+    @Override
+    public void setId(Long contador) {
+
+    }
 }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class MaterialService implements MaterialServiceImpl {
+public class MaterialServiceImpl implements MaterialService {
     private Repository<Material> materialRepository;
     @Override
     public void registrarMaterial(Material m) {

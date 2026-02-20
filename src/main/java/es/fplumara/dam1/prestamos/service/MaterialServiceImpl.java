@@ -4,7 +4,7 @@ import es.fplumara.dam1.prestamos.model.Material;
 
 import java.util.List;
 
-public interface MaterialServiceImpl {
+public interface MaterialService {
     void registrarMaterial(Material m);
     void darDeBaja(String idMaterial);
     List<Material> listar();
