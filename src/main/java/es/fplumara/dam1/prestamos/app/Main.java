@@ -1,5 +1,7 @@
 package es.fplumara.dam1.prestamos.app;
 
+import es.fplumara.dam1.prestamos.service.PrestamoService;
+
 /**
  * Main de ejemplo para demostrar el flujo mínimo del examen (sin menú complejo).
  * La idea es que este método ejecute una "demo" por consola.
@@ -9,10 +11,12 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Examen DAM1 - Préstamo de Material (Java 21)");
 
+       Ma
         /*
          * FLUJO MÍNIMO OBLIGATORIO (lo que debe hacer tu main)
          *
          * 1) Crear repositorios en memoria
+
          *    - Crear MaterialRepositoryImpl (almacena materiales en memoria).
          *    - Crear PrestamoRepositoryImpl (almacena préstamos en memoria).
          *
