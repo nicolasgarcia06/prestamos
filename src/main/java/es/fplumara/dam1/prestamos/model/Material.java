@@ -49,4 +49,5 @@ public abstract class  Material implements Identificable{
     public void setEtiquetas(Set<String> etiquetas) {
         this.etiquetas = etiquetas;
     }
+   public abstract String getTipo();
 }

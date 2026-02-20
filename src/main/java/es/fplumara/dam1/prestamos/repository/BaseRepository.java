@@ -7,19 +7,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class BaseRepository <T extends Identificable> implements Repository{
-Map<String,T> datos;
+public class BaseRepository <T extends Identificable> implements Repository<T>{
+private Map<String,T> datos;
 private Long contador=0L;
 
+    public BaseRepository(Map<String, T> datos) {
+        this.datos = datos;
+    }
 
     @Override
-    public void save(Object elemento) {
+    public void save(T elemento) {
         if(elemento.getId()==null) {
             elemento.setId(contador);
             contador++;
         }
         datos.put(elemento.getId(), (T) elemento);
-        return elemento;
+
     }
 
     @Override

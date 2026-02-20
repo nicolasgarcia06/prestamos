@@ -1,49 +1,12 @@
 package es.fplumara.dam1.prestamos.service;
 
-import es.fplumara.dam1.prestamos.exception.DuplicadoException;
-import es.fplumara.dam1.prestamos.exception.MaterialNoDisponibleException;
-import es.fplumara.dam1.prestamos.exception.NoEncontradoException;
-import es.fplumara.dam1.prestamos.model.EstadoMaterial;
 import es.fplumara.dam1.prestamos.model.Material;
-import es.fplumara.dam1.prestamos.repository.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-public class MaterialService implements MaterialServiceImpl {
-    private Repository<Material> materialRepository;
-    @Override
-    public void registrarMaterial(Material m) {
-        Optional<Material> material=materialRepository.findById(m.getId());
-        if(material!=null){
-            throw new DuplicadoException("no existe");
-        }
-if(m.getId()==null || m.getId().isEmpty()){
-    throw new IllegalArgumentException("esta vacio");
-}
-    }
+public interface MaterialService {
+    void registrarMaterial(Material m);
+    void darDeBaja(String idMaterial);
+    List<Material> listar();
 
-    @Override
-    public void darDeBaja(String idMaterial) {
-Optional<Material> opt=materialRepository.findById(idMaterial);
-        Material material = opt.get();
-if(material==null){
-    throw new NoEncontradoException("no existe");
-}
-
-if(material.getEstado().equals(EstadoMaterial.BAJA)){
-    throw new MaterialNoDisponibleException("ya esta en baja");
-}
-if(material!=null && !material.getEstado().equals(EstadoMaterial.BAJA)){
-    material.setEstado(EstadoMaterial.BAJA);
-    materialRepository.save(material);
-        }
-
-    }
-
-    @Override
-    public List<Material> listar() {
-       return materialRepository.listAll();
-    }
 }
