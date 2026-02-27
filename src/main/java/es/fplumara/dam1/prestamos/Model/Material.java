@@ -1,12 +1,12 @@
-package es.fplumara.dam1.prestamos.model;
+package es.fplumara.dam1.prestamos.Model;
 
 import java.util.Set;
 
-public abstract class  Material implements Identificable{
+public abstract class Material implements Identificable{
     private String id;
     private String nombre;
     private EstadoMaterial estado;
-    private Set<String> etiquetas;
+    Set<String> etiquetas;
 
     public Material() {
     }
@@ -18,6 +18,7 @@ public abstract class  Material implements Identificable{
         this.etiquetas = etiquetas;
     }
 
+    @Override
     public String getId() {
         return id;
     }

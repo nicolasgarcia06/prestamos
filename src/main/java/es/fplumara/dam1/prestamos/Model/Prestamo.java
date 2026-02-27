@@ -1,27 +1,28 @@
-package es.fplumara.dam1.prestamos.model;
+package es.fplumara.dam1.prestamos.Model;
 
 import java.time.LocalDate;
 
 public class Prestamo implements Identificable{
-    private String id;
-    private String idMaterial;
-    private String profesor;
-    private LocalDate fecha;
+   private String id;
 
-    public Prestamo(String id, String idMaterial, String profesor, LocalDate fecha) {
+ private String idMaterial;
+
+private String profesor;
+private    LocalDate fecha;
+
+    public Prestamo() {
+    }
+
+    public Prestamo(String id, String profesor, String idMaterial, LocalDate fecha) {
         this.id = id;
-        this.idMaterial = idMaterial;
         this.profesor = profesor;
+        this.idMaterial = idMaterial;
         this.fecha = fecha;
     }
 
-    public String getId() {
-        return id;
-    }
-
     @Override
-    public void setId(Long contador) {
-
+    public String getId() {
+        return "";
     }
 
     public void setId(String id) {
@@ -36,19 +37,19 @@ public class Prestamo implements Identificable{
         this.idMaterial = idMaterial;
     }
 
-    public String getProfesor() {
-        return profesor;
-    }
-
-    public void setProfesor(String profesor) {
-        this.profesor = profesor;
-    }
-
     public LocalDate getFecha() {
         return fecha;
     }
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
+    }
+
+    public String getProfesor() {
+        return profesor;
+    }
+
+    public void setProfesor(String profesor) {
+        this.profesor = profesor;
     }
 }
